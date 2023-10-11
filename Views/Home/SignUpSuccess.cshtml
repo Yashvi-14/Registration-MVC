@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "SignUpSuccess";
+}
+
+<h2>Registration Done Successfullyyyy!!!</h2>
+
+<p>You Have successfully Done Registration.</p>
+
+
+@if (Session["UserId"] != null)
+{
+    <p>Welcome, User ID: @Session["UserId"], Username: @Session["UserName"]</p>
+}
+else
+{
+    <p>You are not logged in.</p>
+}
+<div>
+    @Html.ActionLink("Go to Login Page", "Login")
+</div>

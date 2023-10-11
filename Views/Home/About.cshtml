@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "HomePage";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>You Have successfully Logged in.</p>
+
+@if (Session["UserId"] != null)
+{
+    <p>Welcome, User ID: @Session["UserId"], Username: @Session["UserName"]</p>
+}
+else
+{
+    <p>You are not logged in.</p>
+}
