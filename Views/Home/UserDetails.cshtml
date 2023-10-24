@@ -1,0 +1,59 @@
+﻿
+@model List<LoginMVC.Models.User>
+
+@{
+    ViewBag.Title = "UserDetails";
+}
+
+<h2>UserDetails</h2>
+
+<table class="table">
+  @*  @Html.HiddenFor(model => model.UserId)*@
+    <tr>
+        <th>First Name</th>
+        <th>Middle Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Date of Birth</th>
+        <th>Phone Number</th>
+        <th>Nationality</th>
+        <th>User Name</th>
+        <th>Password</th>
+        <th>Created By</th>
+        <th>Created On</th>
+        <th>Updated By</th>
+        <th>Updated On</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.FirstName</td>
+            <td>@user.MiddleName</td>
+            <td>@user.LastName</td>
+            <td>@user.Email</td>
+            <td>@user.DateOfBirth.ToShortDateString()</td>
+            <td>@user.PhoneNumber</td>
+            <td>@user.Nationality</td>
+            <td>@user.UserName</td>
+            <td>@user.Password</td>
+            <td>@user.CreatedBy</td>
+            <td>@user.CreatedOn.ToShortDateString()</td>
+            <td>@user.UpdatedBy</td>
+            <td>@user.UpdatedOn.ToShortDateString()</td>
+            <td>
+                @Html.ActionLink("Create", "SignUp", new { /* id = user.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new { /* id = user.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { id = user.IdUser }) |
+            </td>
+        </tr>
+    }
+</table>
+
+
+<p>
+    @* @Html.ActionLink("Edit", "Edit", new { /* id = user.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id = user.PrimaryKey */ }) |*@
+   
+</p>
+

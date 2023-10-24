@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.Data;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 namespace LoginMVC.Models
@@ -11,8 +12,8 @@ namespace LoginMVC.Models
 {
     public class User
     {
-       
-   
+
+        public int IdUser { get; set; }
         [Required(ErrorMessage = "Please enter the FirstName ")]
         [StringLength(50, MinimumLength = 3)]
         public string FirstName { get; set; }
@@ -65,5 +66,16 @@ namespace LoginMVC.Models
         public string UpdatedBy { get; set; }
 
         public DateTime UpdatedOn { get; set; }
+        //public DataTable UserData { get; set; }
+       /* public User(DataTable dataTable)
+        {
+            // Populate properties from the DataTable here
+            // For example:
+            FirstName = dataTable.Rows[0]["FirstName"].ToString();
+            MiddleName = dataTable.Rows[0]["MiddleName"].ToString();
+            LastName = dataTable.Rows[0]["LastName"].ToString();
+            Email = dataTable.Rows[0]["Email"].ToString();
+            // Initialize other properties as needed
+        }*/
     }
 }

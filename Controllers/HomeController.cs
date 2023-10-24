@@ -108,53 +108,10 @@ namespace LoginMVC.Controllers
         [HttpGet]
         public ActionResult SignUp()
         {
-            /* var model = new User();
-             string connectionString = ConfigurationManager.ConnectionStrings["DBConnectionStr"].ConnectionString;
-             string query = "SELECT IdCountry, CountryName FROM CountryMaster";
-
-             List<SelectListItem> nationalities = new List<SelectListItem>();
-
-             try
-             {
-                 using (SqlConnection connection = new SqlConnection(connectionString))
-                 {
-                     connection.Open();
-
-                     using (SqlCommand command = new SqlCommand(query, connection))
-                     {
-                         using (SqlDataReader reader = command.ExecuteReader())
-                         {
-                             while (reader.Read())
-                             {
-                                 nationalities.Add(new SelectListItem
-                                 {
-                                     Value = reader["IdCountry"].ToString(),
-                                     Text = reader["CountryName"].ToString()
-                                 });
-                             }
-                         }
-                     }
-                 }
-
-
-                 ViewBag.Nationalities = new SelectList(nationalities, "Value", "Text");
-
-                 model.Nationalities = ViewBag.Nationalities;*/
             SetNationalities();
                 return View();
             }
-           /* catch (Exception ex)
-            {
-
-                //nationalities.Clear();
-                nationalities.Add(new SelectListItem { Value = "0", Text = "Error: Unable to retrieve data" });
-
-                ViewBag.Nationalities = new SelectList(nationalities, "Value", "Text");
-
-
-                return View(model);
-            }*/
-
+         
         
 
         [HttpPost]
@@ -209,7 +166,8 @@ namespace LoginMVC.Controllers
 
                     //ViewBag.Nationalities = new SelectList(nationalities, "Value", "Text");
 
-                    return RedirectToAction("SignUpSuccess");
+                    //return RedirectToAction("SignUpSuccess");
+                    return RedirectToAction("UserDetails");
                 }
                 catch (Exception ex)
                 {
@@ -223,5 +181,47 @@ namespace LoginMVC.Controllers
             }
 
         }
+        [HttpGet]
+        public ActionResult UserDetails()
+        {
+            try
+            {
+                
+                string query = "SELECT * FROM UserMaster_Yashvi";
+                var mySqlParams = new List<SqlParameter>();
+
+                DataTable result = DBHelper.GetDataTable(query, mySqlParams);
+
+                
+                List<User> users = new List<User>();
+                foreach (DataRow row in result.Rows)
+                {
+                    User user = new User
+                    {
+                        FirstName = row["FirstName"].ToString(),
+                        MiddleName = row["MiddleName"].ToString(),
+                        LastName = row["LastName"].ToString(),
+                        Email = row["Email"].ToString(),
+                        DateOfBirth = (DateTime)row["DateOfBirth"],
+                        PhoneNumber = row["PhoneNumber"].ToString(),
+                        Nationality = (int)row["Nationality"],
+                        UserName = row["UserName"].ToString(),
+                        Password = row["Password"].ToString(),
+                        CreatedBy = row["CreatedBy"].ToString(),
+                        CreatedOn = (DateTime)row["CreatedOn"],
+
+                    };
+                    users.Add(user);
+                }
+
+                return View(users);
+            }
+            catch (Exception ex)
+            {
+               
+                ViewBag.ErrorMessage = "An error occurred: " + ex.Message;
+                return View("Error");
+            }
+        }       
     }
 }

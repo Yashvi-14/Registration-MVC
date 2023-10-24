@@ -13,11 +13,18 @@ namespace LoginMVC
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            /*routes.MapRoute(
+                name: "DeleteUser",
+                url: "User/Delete/{userId}",
+                defaults: new { controller = "Home", action = "Delete" }
+            );*/
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "SignUp", id = UrlParameter.Optional }
             );
+
+            
         }
     }
 }
